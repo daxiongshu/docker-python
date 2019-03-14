@@ -63,6 +63,9 @@ RUN apt-get install -y gnupg zip && \
     wget --no-verbose "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel_${BAZEL_VERSION}-linux-x86_64.deb" && \
     dpkg -i bazel_*.deb && \
     rm bazel_*.deb
+    
+# Tensorflow doesn't support python 3.7 yet. See https://github.com/tensorflow/tensorflow/issues/20517
+RUN conda install -y python=3.6.6
 
 # Fetch tensorflow & install dependencies.
 RUN cd /usr/local/src && \
